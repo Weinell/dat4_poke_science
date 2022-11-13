@@ -5,3 +5,15 @@ We want to make a program that can calculate the relative power of a given Pokem
 
 ### Data gathering
 We have found an API that contains all the data we need: https://pokeapi.co/
+
+### Data analysis
+To begin with the plan is:
+- To figure out whether a Pokemon should be used as a Physical or Special damage attack dealer, and find the strongest attack it can learn.
+    - Scale the attack's damage with the Pokemon's attack stat and its STAB (Same Type Attack Bonus) modifier
+    - Sum its defensive stats (HP, defense, special defense)
+    - Determine how important the Speed stat is for the Pokemon
+
+- Give the Pokemon a score compared to all other Pokemons
+
+#### Future nice-to-haves
+- Figure out how strong a given Pokemon is compared to other strong Pokemons
