@@ -6,7 +6,7 @@ We want to make a program that can calculate the relative power of a given Pokem
 
 ### Data gathering
 
-We have found an API that contains all the data we need: <https://pokeapi.co/>(Pokeapi)
+We have found an API that contains all the data we need: <https://pokeapi.co/>
 
 ### Data analysis
 
