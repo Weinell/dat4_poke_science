@@ -25,4 +25,6 @@ Use a graphing tool, like Matplotlib, to show where the Pokemon is placed in pow
 
 ### Future nice-to-haves
 
-- Figure out how strong a given Pokemon is compared to other strong Pokemons
+- Figure out how strong a given Pokemon is compared to other strong Pokemons.
+
+- The probability of a team, consisting of 6 Pokemon, winning against an opponent team.
