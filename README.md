@@ -1,5 +1,7 @@
 # PokeScience
 
+![pika](https://user-images.githubusercontent.com/58971957/201761340-5ecabcbc-c7a0-4631-8761-2621b598c1f6.jpg)
+
 ## PokeScience Proposal
 
 We want to make a program that can calculate the relative power of a given Pokemon compared to all existing Pokemon. Pokemons have either one or two types (e.g. fire, grass, electric), and each type is either strong, netrual, or weak to other types (e.g. fire is strong versus grass). Apart from that Pokemons can learn different Moves that can either deal Physical damage or Special damage that are increased with the attacking Pokemon's stats and reduced by the defending Pokemon's stats.
