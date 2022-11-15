@@ -1,8 +1,18 @@
 import requests
+import csv
 
 
-def get_pokemon(name: str):
-    res = requests.get(f'https://pokeapi.co/api/v2/pokemon/{name}')
+def get_all_pokemon(limit: int):
+
+    res = requests.get(f'https://pokeapi.co/api/v2/pokemon?limit={limit}&offset=0')
+    data = res.json()
+
+    return data['results']
+
+
+def get_pokemon(id: int):
+    res = requests.get(f'https://pokeapi.co/api/v2/pokemon/{id}')
+    res_legendary = requests.get(f'https://pokeapi.co/api/v2/pokemon-species/{id}')
     
     data = res.json()
 
@@ -19,11 +29,28 @@ def get_pokemon(name: str):
     sp_defense = data['stats'][4]['base_stat']
     speed = data['stats'][5]['base_stat']
 
-    return poke_id, name, type1, type2, hp, attack, defense, sp_attack, sp_defense, speed
+    is_legendary = True if res_legendary.json()['is_legendary'] | res_legendary.json()['is_mythical'] else False
 
+    return poke_id, name, type1, type2, hp, attack, defense, sp_attack, sp_defense, speed, is_legendary
+
+
+def convert_pokemon_to_csv():
     
+    header = ['Id', 'Name', 'Type 1', 'Type 2', 'HP', 'Attack', 'Defense', 'Sp. Attack', 'Sp. Defense', 'Speed', 'Is_Legendary']
+    # data = [poke_id, name, type1, type2, hp, attack, defense, sp_attack, sp_defense, speed]
+
+    all_pokemon = get_all_pokemon(9999)
+
+    with open('./data/pokemon.csv', 'w') as file:
+        writer = csv.writer(file)
+        writer.writerow(header)
+
+
+        for index, i in enumerate(all_pokemon):
+            pokemon = get_pokemon(index + 1)
+            writer.writerow(pokemon)
+            print(pokemon)
+
 
 if __name__ == '__main__':
-    get_pokemon('pikachu')
-    get_pokemon('charizard')
-    print(get_pokemon('pikachu'))
+    convert_pokemon_to_csv()
