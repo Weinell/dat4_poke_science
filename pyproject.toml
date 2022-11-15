@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "poke-science"
+version = "0.1.0"
+description = ""
+authors = ["Nikolaj Weinell <nikolajweinell@hotmail.com>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pandas = "^1.5.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
