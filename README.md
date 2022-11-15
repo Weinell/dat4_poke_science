@@ -23,7 +23,7 @@ To begin with the plan is:
 
 - Give the Pokemon a score compared to all other Pokemons
 
-- Use a decision tree to determine whether a Pokemon and its types counter a different Pokemon and its types.
+- Use a decision tree to determine whether a Pokemon and its types counter a different Pokemon and its types, and scale that damage with the score found above.
 
 ![counters](https://media.discordapp.net/attachments/1040234360500146186/1042012000387072010/image.png)
 
