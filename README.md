@@ -27,6 +27,10 @@ To begin with the plan is:
 
 ![counters](https://media.discordapp.net/attachments/1040234360500146186/1042012000387072010/image.png)
 
+#### Ambitious machine learning
+
+- Use an unsupervised learning algorithm like, autoencoder, that automagically calculates the "power levels" of Pokemon. 
+
 ### Data visualization
 
 Use a graphing tool, like Matplotlib, to show where the Pokemon is placed in power.
