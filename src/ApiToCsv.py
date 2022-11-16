@@ -36,7 +36,7 @@ def get_pokemon(id: int):
 
 def convert_pokemon_to_csv():
     
-    header = ['Id', 'Name', 'Type 1', 'Type 2', 'HP', 'Attack', 'Defense', 'Sp. Attack', 'Sp. Defense', 'Speed', 'Is_Legendary']
+    header = ['Id', 'Name', 'Type 1', 'Type 2', 'HP', 'Attack', 'Defense', 'SpAttack', 'SpDefense', 'Speed', 'Is_Legendary']
     # data = [poke_id, name, type1, type2, hp, attack, defense, sp_attack, sp_defense, speed]
 
     all_pokemon = get_all_pokemon(9999)
