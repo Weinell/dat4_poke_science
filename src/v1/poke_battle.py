@@ -1,15 +1,7 @@
 import csv
-import math
-import os.path
-import random
-import pandas as pd
 from src.ApiToCsv import read_pokemon_data
-#hej
-MAX_ID = 151
 
-def get_random_pokemon(not_this_pokemon: int | None):
-    poke_id = math.floor(random.random() * MAX_ID) + 1
-    print(poke_id)
+MAX_ID = 151
 
 
 def battle_pokemon(first: int, second: int):
@@ -46,9 +38,9 @@ def write_all_battles():
         for i in range(poke_count):
             for j in range(poke_count):
                 print(i, "vs", j)
+                # +1 because we are going for Pokemon id and not index in array
                 writer.writerow(battle_pokemon(j + 1, i + 1))
 
 
 if __name__ == "__main__":
     write_all_battles()
-
