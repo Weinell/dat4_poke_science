@@ -18,12 +18,17 @@ def battle_pokemon(first: int, second: int):
     poke_one = df[df["Id"] == first]
     poke_two = df[df["Id"] == second]
 
-    poke_one.astype({"Sum_stats": "int"})
+
+
+    print(poke_one["Sum_stats"])
+    print(poke_two["Sum_stats"])
+
+    #poke_one.astype({"Sum_stats": "int"})
     
-    if poke_one.Sum_stats > poke_two.Sum_stats:
-        print(f"{poke_one} wins")
-    else:
-        print(f"{poke_two} wins")
+   #if poke_one.Sum_stats > poke_two.Sum_stats:
+       # print(f"{poke_one} wins")
+   #else:
+       # print(f"{poke_two} wins")
 
 
 if __name__ == "__main__":
