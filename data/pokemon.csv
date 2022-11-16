@@ -1,4 +1,4 @@
-Id,Name,Type 1,Type 2,HP,Attack,Defense,Sp. Attack,Sp. Defense,Speed,Is_Legendary
+Id,Name,Type 1,Type 2,HP,Attack,Defense,SpAttack,SpDefense,Speed,Is_Legendary
 1,bulbasaur,grass,poison,45,49,49,65,65,45,False
 2,ivysaur,grass,poison,60,62,63,80,80,60,False
 3,venusaur,grass,poison,80,82,83,100,100,80,False
