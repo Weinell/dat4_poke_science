@@ -5,7 +5,7 @@ import random
 import pandas as pd
 from src.ApiToCsv import read_pokemon_data
 
-MAX_ID = 905
+MAX_ID = 151
 
 
 def get_random_pokemon(not_this_pokemon: int | None):
@@ -22,8 +22,6 @@ def battle_pokemon(first: int, second: int):
     poke_one = df[df["Id"] == first]
     poke_two = df[df["Id"] == second]
 
-    print(poke_two.values[0])
-
     poke_one_stats = poke_one["Sum_stats"].values[0]
     poke_two_stats = poke_two["Sum_stats"].values[0]
 
@@ -39,16 +37,19 @@ def battle_pokemon(first: int, second: int):
     return winner, loser, stat_diff
 
 
-def write_match_details():
+def write_all_battles():
+    poke_count = MAX_ID
     header = ['Winner', 'Loser', 'stat_diff']
-
-    match = battle_pokemon(3, 25)
 
     with open("../../data/v1/match.csv", "w") as file:
         writer = csv.writer(file)
         writer.writerow(header)
-        writer.writerow(match)
+        for i in range(poke_count):
+            for j in range(poke_count):
+                print(i, "vs", j)
+                writer.writerow(battle_pokemon(j + 1, i + 1))
 
 
 if __name__ == "__main__":
-    write_match_details()
+    write_all_battles()
+
