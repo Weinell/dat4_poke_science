@@ -15,3 +15,24 @@ def sum_stats():
 sum_stats()
 print(df)
 
+
+### Version 1: 1v1 with sum of stats
+
+### Version 2: 1v1 with sum of stats 
+###            1 type
+
+### Version 3: 1v1 with sum of stats
+###            1 type
+###            best physical attack
+
+### Version 4: 1v1 with sum of stats
+###            1 type
+###            best special attack
+
+### Version 5: 1v1 with sum of stats
+###            2 type
+###            best physical attack
+
+### Version 6: 1v1 with sum of stats
+###            2 type
+###            best special attack
