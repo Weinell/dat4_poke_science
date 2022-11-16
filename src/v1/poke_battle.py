@@ -6,7 +6,6 @@ import pandas as pd
 from src.ApiToCsv import read_pokemon_data
 
 MAX_ID = 151
-#hej
 
 def get_random_pokemon(not_this_pokemon: int | None):
     poke_id = math.floor(random.random() * MAX_ID) + 1
