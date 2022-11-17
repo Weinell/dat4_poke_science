@@ -4,11 +4,15 @@ import os.path
 import pandas as pd
 
 
-def read_pokemon_data():
-    file_path = "../../data/pokemon.csv"
+def read_pokemon_data(file_path: str):
     if not os.path.exists(file_path):
         convert_pokemon_to_csv()
 
+    df = pd.read_csv(file_path)
+    return df
+
+
+def read_battles_data(file_path: str):
     df = pd.read_csv(file_path)
     return df
 
@@ -46,7 +50,8 @@ def get_pokemon(poke_id: int):
 
 
 def convert_pokemon_to_csv():
-    header = ['Id', 'Name', 'Type_1', 'Type_2', 'HP', 'Attack', 'Defense', 'Sp_Attack', 'Sp_Defense', 'Speed', 'Sum_stats',
+    header = ['Id', 'Name', 'Type_1', 'Type_2', 'HP', 'Attack', 'Defense', 'Sp_Attack', 'Sp_Defense', 'Speed',
+              'Sum_stats',
               'Is_Legendary']
     # data = [poke_id, name, type1, type2, hp, attack, defense, sp_attack, sp_defense, speed]
 
@@ -63,4 +68,4 @@ def convert_pokemon_to_csv():
 
 
 if __name__ == '__main__':
-    convert_pokemon_to_csv()
+    read_battles_data()
