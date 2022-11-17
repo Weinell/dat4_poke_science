@@ -4,6 +4,9 @@ import os.path
 import pandas as pd
 
 
+
+MAX_ID = 151
+
 def read_pokemon_data(file_path: str):
     if not os.path.exists(file_path):
         convert_pokemon_to_csv()
@@ -13,6 +16,9 @@ def read_pokemon_data(file_path: str):
 
 
 def read_battles_data(file_path: str):
+    if not os.path.exists(file_path):
+        write_all_battles()
+
     df = pd.read_csv(file_path)
     return df
 
@@ -67,5 +73,19 @@ def convert_pokemon_to_csv():
             print(pokemon)
 
 
+def write_battle(poke_one_id, poke_two_id, winner):
+    poke_count = MAX_ID
+    header = ['Poke_1', 'Poke_2', 'Winner']
+
+    with open("../../data/v1/match.csv", "w") as file:
+        writer = csv.writer(file)
+        has_header = csv.Sniffer().has_header(file.read(1024))
+        if has_header:
+            writer.writerow([poke_one_id, poke_two_id, winner])
+        else:
+            writer.writerow(header)
+            writer.writerow([poke_one_id, poke_two_id, winner])
+
+
 if __name__ == '__main__':
-    read_battles_data()
+    read_pokemon_data('../../data/pokemon.csv')

@@ -1,49 +1,52 @@
 import csv
 import time
-from src.ApiToCsv import read_pokemon_data, read_battles_data
+from src.api_file_handler import read_pokemon_data, read_battles_data, write_battle
 import numpy as np
+import pandas as pd
 
 MAX_ID = 151
 
 
-def battle_pokemon(first: int, second: int):
+def battle_pokemon():
     df = read_pokemon_data("../../data/pokemon.csv")
-    poke_one = df[df["Id"] == first]
-    poke_two = df[df["Id"] == second]
+    for i in df.index:
+        for j in df.index:
 
-    poke_one_id = df[df["Id"] == first].values[:, 0][0]
-    poke_two_id = df[df["Id"] == second].values[:, 0][0]
+            poke_one = df[df["Id"] == i]
+            poke_two = df[df["Id"] == j]
 
-    poke_one_stats = poke_one["Sum_stats"].values[0]
-    poke_two_stats = poke_two["Sum_stats"].values[0]
+            poke_one_id = df[df["Id"] == i].values[:, 0][0]
+            poke_two_id = df[df["Id"] == j].values[:, 0][0]
 
-    if poke_one_stats > poke_two_stats:
-        winner = poke_one_id
-    else:
-        winner = poke_two_id
+            poke_one_stats = poke_one["Sum_stats"].values[0]
+            poke_two_stats = poke_two["Sum_stats"].values[0]
 
-    return poke_one_id, poke_two_id, winner
+            if poke_one_stats > poke_two_stats:
+                winner = poke_one_id
+            else:
+                winner = poke_two_id
+            
 
+            write_battle(poke_one_id, poke_two_id, winner)
+            
 
-def write_all_battles():
-    poke_count = MAX_ID
-    header = ['Poke_1', 'Poke_2', 'Winner']
-
-    with open("../../data/v1/match.csv", "w") as file:
-        writer = csv.writer(file)
-        writer.writerow(header)
-        for i in range(poke_count):
-            for j in range(poke_count):
-                print(i, "vs", j)
-                # +1 because we are going for Pokemon id and not index in array
-                writer.writerow(battle_pokemon(j + 1, i + 1))
 
 
 def calc_battles():
     pokemons = read_pokemon_data("../../data/pokemon.csv")
     battle_results = read_battles_data("../../data/v1/match.csv")
 
-    header = ['']
+    header = ['Poke_1_Id', 'Poke_1_Name', 'Poke_1_HP', 'Poke_1_Attack', 'Poke_1_Defense', 'Poke_1_Sp_Attack',
+              'Poke_1_Sp_Defense', 'Poke_1_Speed', 'Poke_1_Sum_Stats',
+              'Poke_2_Id', 'Poke_2_Name', 'Poke_2_HP', 'Poke_2_Attack', 'Poke_2_Defense', 'Poke_2_Sp_Attack',
+              'Poke_2_Sp_Defense', 'Poke_2_Speed', 'Poke_2_Sum_Stats',
+              'Diff_HP', 'Diff_Attack', 'Diff_Defense', 'Diff_Sp_Attack', 'Diff_Sp_Defense', 'Diff_Speed',
+              'Diff_Sum_Stats']
+    
+    pokemon_list = []
+
+    df = pd.DataFrame(columns=header)
+    print(df)
 
     for index, row in battle_results.iterrows():
         first_pokemon = row["Poke_1"]
@@ -77,7 +80,7 @@ def calc_battles():
 
         winner = row["Winner"].values[0]
 
-    return poke_one_obj, poke_two_obj
+    return df
 
 
 
@@ -86,5 +89,5 @@ def calc_battles():
 
 
 if __name__ == "__main__":
-
-    calc_battles()
+    battle_pokemon()
+ #   calc_battles()
