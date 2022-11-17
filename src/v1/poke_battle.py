@@ -110,19 +110,8 @@ def calc_battles():
     print(time.time() - start_time)
 
 
-def plot_types():
-    pokemons = read_pokemon_data("../../data/pokemon.csv")
-
-    plot = pokemons['Type_1'].value_counts().plot(kind="bar", title="Number based on first type")
-    fig = plot.get_figure()
-    fig.savefig("../../data/typesfig.png")
-
 
 if __name__ == "__main__":
-    # write_all_battles()
-    # battle_pokemon(4, 25)
+
     calc_battles()
 
-    # weinell_test()
-    # weinell_calc()
-    # plot_types()
