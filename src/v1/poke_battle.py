@@ -40,18 +40,48 @@ def write_all_battles():
 
 
 def calc_battles():
-    start_time = time.time()
     pokemons = read_pokemon_data("../../data/pokemon.csv")
     battle_results = read_battles_data("../../data/v1/match.csv")
+
+    header = ['']
 
     for index, row in battle_results.iterrows():
         first_pokemon = row["Poke_1"]
         second_pokemon = row["Poke_2"]
-        winner = row["Winner"]
+        
 
-        poke_one = pokemons.loc[pokemons["Id"] == first_pokemon].values[:, 4][0]
-        poke_two = pokemons.loc[pokemons["Id"] == second_pokemon].values[:, 4][0]
-    print(time.time() - start_time)
+        poke_one = pokemons[pokemons["Id"] == first_pokemon]
+        poke_two = pokemons[pokemons["Id"] == second_pokemon]
+        
+        # HP,Attack,Defense,Sp_Attack,Sp_Defense,Speed
+
+        poke_one_obj = {
+            "poke_one_health": poke_one['HP'].values[0],
+            "poke_one_attack": poke_one['Attack'].values[0],
+            "poke_one_defense": poke_one['Defense'].values[0],
+            "poke_one_spattack": poke_one['Sp_Attack'].values[0],
+            "poke_one_spdefense": poke_one['Sp_Defense'].values[0],
+            "poke_one_speed": poke_one['Speed'].values[0]
+        }
+        
+
+        poke_two_obj = {
+            "poke_two_health": poke_two['HP'].values[0],
+            "poke_two_attack": poke_two['Attack'].values[0],
+            "poke_two_defense": poke_two['Defense'].values[0],
+            "poke_two_spattack": poke_two['Sp_Attack'].values[0],
+            "poke_two_spdefense": poke_two['Sp_Defense'].values[0],
+            "poke_two_speed": poke_two['Speed'].values[0]
+        }
+
+
+        winner = row["Winner"].values[0]
+
+    return poke_one_obj, poke_two_obj
+
+
+
+
 
 
 
