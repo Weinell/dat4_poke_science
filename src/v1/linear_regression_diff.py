@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn import linear_model
 
 
-df = pd.read_csv('battle_data.csv')
+df = pd.read_csv('battle_data_diff.csv')
 
 X = df.iloc[:,1:]
 y = df.iloc[:,:1]

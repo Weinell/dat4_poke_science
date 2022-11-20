@@ -40,6 +40,17 @@ def write_all_battles():
                 writer.writerow(battle_pokemon(j + 1, i + 1))
 
 
+def calc_stat_diff(poke1, poke2):
+    return poke1 - poke2
+
+
+def did_1_win(winner, first_poke):
+    if winner == first_poke:
+        return 1
+    else:
+        return 0
+
+
 def calc_battles():
     pokemons = read_pokemon_data("../../data/pokemon.csv")
     battle_results = read_battles_data("../../data/v1/match.csv")
@@ -63,14 +74,29 @@ def calc_battles():
         poke_one = pokemons[pokemons["Id"] == first_pokemon]
         poke_two = pokemons[pokemons["Id"] == second_pokemon]
 
-        pokemon_battle_info = pd.Series([winner,poke_one['HP'].values[0],poke_one['Attack'].values[0],poke_one['Defense'].values[0],poke_one['Sp_Attack'].values[0],poke_one['Sp_Defense'].values[0],poke_one['Speed'].values[0],poke_two['HP'].values[0],poke_two['Attack'].values[0],poke_two['Defense'].values[0],poke_two['Sp_Attack'].values[0],poke_two['Sp_Defense'].values[0],poke_two['Speed'].values[0]])
-        battle_to_concat = pd.DataFrame([pokemon_battle_info])
+        win = did_1_win(winner, first_pokemon)
+
+        hp_diff = calc_stat_diff(poke_one['HP'].values[0],poke_two['HP'].values[0])
+        attack_diff = calc_stat_diff(poke_one['Attack'].values[0],poke_two['Attack'].values[0])
+        defense_diff = calc_stat_diff(poke_one['Defense'].values[0],poke_two['Defense'].values[0])
+        sp_attack_diff = calc_stat_diff(poke_one['Sp_Attack'].values[0],poke_two['Sp_Attack'].values[0])
+        sp_defense_diff = calc_stat_diff(poke_one['Sp_Defense'].values[0],poke_two['Sp_Defense'].values[0])
+        speed_diff = calc_stat_diff(poke_one['Speed'].values[0],poke_two['Speed'].values[0])
+
+        stats = pd.Series([win, hp_diff, attack_diff, defense_diff, sp_attack_diff, sp_defense_diff, speed_diff])
+
+        #pokemon_battle_info_stat = pd.Series(calc_stat_diff(poke_one['HP'].values[0],poke_two['HP'].values[0]),calc_stat_diff(poke_one['Attack'].values[0],poke_two['Attack'].values[0]),calc_stat_diff(poke_one['Defense'].values[0],poke_two['Defense'].values[0]),calc_stat_diff(poke_one['Sp_Attack'].values[0],poke_two['Sp_Attack'].values[0]),calc_stat_diff(poke_one['Sp_Defense'].values[0],poke_two['Sp_Defense'].values[0]),calc_stat_diff(poke_one['Speed'].values[0],poke_two['Speed'].values[0])))
+
+        #pokemon_battle_info = pd.Series([winner,poke_one['HP'].values[0],poke_one['Attack'].values[0],poke_one['Defense'].values[0],poke_one['Sp_Attack'].values[0],poke_one['Sp_Defense'].values[0],poke_one['Speed'].values[0],poke_two['HP'].values[0],poke_two['Attack'].values[0],poke_two['Defense'].values[0],poke_two['Sp_Attack'].values[0],poke_two['Sp_Defense'].values[0],poke_two['Speed'].values[0]])
+        #battle_to_concat = pd.DataFrame([pokemon_battle_info])
+
+        battle_to_concat = pd.DataFrame([stats])
         df = pd.concat([battle_to_concat, df], ignore_index=True)
-        print('columns:',df.columns)
+        print('columns:', df.columns)
         print(df)
 
     print(df)
-    df.to_csv('battle_data.csv', index=False)
+    df.to_csv('battle_data_diff.csv', index=False)
     print(df)
 
 
