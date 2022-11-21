@@ -110,7 +110,6 @@ def calc_battles():
 
 
 if __name__ == "__main__":
-
     #write_all_battles()
     #calc_battles()
     #calc_battles_diff()
