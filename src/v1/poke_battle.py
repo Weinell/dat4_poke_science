@@ -35,7 +35,7 @@ def write_all_battles():
             for j in range(poke_count):
                 if i != j:
                     # +1 because we are going for Pokemon id and not index in array
-                    writer.writerow(battle_pokemon(j + 1, i + 1))
+                    writer.writerow(battle_pokemon(i + 1, j + 1))
 
 
 def calc_stat_diff(poke1, poke2):
@@ -110,7 +110,7 @@ def calc_battles():
 
 
 if __name__ == "__main__":
-    #write_all_battles()
+    write_all_battles()
     #calc_battles()
     #calc_battles_diff()
 
