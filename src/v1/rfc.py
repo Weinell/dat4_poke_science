@@ -17,4 +17,7 @@ model = rfc.fit(X_train, y_train)
 pred = model.predict(X_test)
 
 
-print(f"accuracy: {accuracy_score(pred, y_test)}")
+
+
+if __main__ == '__main__':
+    print(f"accuracy: {accuracy_score(pred, y_test)}")
