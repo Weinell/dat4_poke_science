@@ -64,7 +64,7 @@ def calc_battles():
     le1 = LabelEncoder()
     df1 = le1.fit_transform(pokemons["Type_1"])
     le2 = LabelEncoder()
-    df2 = le2.fit_transform(pokemons["Type_1"])
+    df2 = le2.fit_transform(pokemons["Type_2"])
 
     df1 = pd.DataFrame(data=df1)
     df2 = pd.DataFrame(data=df2)
@@ -91,6 +91,7 @@ def calc_battles():
         else:
             con = np.append(con, [1])
 
+        print(f"ML created pokemon {con}")
         data.append(con)
         """
         pokemon_battle_info = pd.Series(
@@ -116,15 +117,44 @@ def calc_battles():
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=34)
 
-    rfc = RandomForestClassifier(n_estimators=500)
+    rfc = RandomForestClassifier(n_estimators=35)
     model = rfc.fit(X_train, y_train)
 
     pred = model.predict(X_test)
 
-    print(f"accuracy: {accuracy_score(pred, y_test)}")
+    asd = pd.Series([106, 110, 90, 154, 90, 130, 39, 52, 43, 60, 50, 65])
+    asd = pd.DataFrame([asd])
+    pred2 = model.predict(asd)
+
+    print(f"accuracy 1: {accuracy_score(pred, y_test)}")
+    print(f"accuracy 2: {pred2}")
     print(f"execution in sec: {time.time() - start}")
 
 
+def get_two_pokemon(first_pokemon: int, second_pokemon: int):
+    pokemons = read_pokemon_data("../../data/pokemon.csv")
+
+    # Label encode pokemon types
+    le1 = LabelEncoder()
+    df1 = le1.fit_transform(pokemons["Type_1"])
+    le2 = LabelEncoder()
+    df2 = le2.fit_transform(pokemons["Type_2"])
+
+    df1 = pd.DataFrame(data=df1)
+    df2 = pd.DataFrame(data=df2)
+
+    pokemons = pokemons.drop(columns=["Type_1", "Type_2"])
+    pokemons = pd.concat([pokemons, df1, df2], axis=1)
+
+    poke_one = pokemons[pokemons["Id"] == first_pokemon].values[:, 2:][0]
+    poke_two = pokemons[pokemons["Id"] == second_pokemon].values[:, 2:][0]
+
+    data = np.concatenate((poke_one, poke_two))
+    print(f"My created pokemon {data}")
+
+    df = pd.DataFrame([data])
+    print(f"df created pokemon {df}")
+    return df
 
 if __name__ == "__main__":
     calc_battles()
