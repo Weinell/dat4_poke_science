@@ -44,5 +44,7 @@ dp = model.decision_path(pokemon_stats)
 pred = model.predict(X_test)
 pred2 = model.predict(pokemon_stats)
 
+
 if __name__ == "__main__":
     print(pred2)
+
