@@ -17,16 +17,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 rfc = RandomForestClassifier(n_estimators=3)
 model = rfc.fit(X_train, y_train)
 
-pokemon_stats = get_two_pokemon(150, 4)
+predict_against_testset = model.predict(X_test)
 
-# apply
-# decision_path
-apply = model.apply(pokemon_stats)
-dp = model.decision_path(pokemon_stats)
-
-pred = model.predict(X_test)
-pred2 = model.predict(pokemon_stats)
+pokemons_to_battle = get_two_pokemon(150, 4)
+predict_two_pokemon = model.predict(pokemons_to_battle)
 
 
 if __name__ == "__main__":
-    print(pred2)
+    print(predict_two_pokemon)
