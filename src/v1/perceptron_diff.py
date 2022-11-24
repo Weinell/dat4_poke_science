@@ -2,7 +2,7 @@ from sklearn.linear_model import Perceptron
 from sklearn.model_selection import train_test_split
 import pandas as pd
 
-df = pd.read_csv("battle_data_diff.csv")
+df = pd.read_csv("../../data/v1/battle_data_diff.csv")
 
 y = df.iloc[:, :1]
 X = df.iloc[:, 1:]
