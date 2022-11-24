@@ -87,23 +87,31 @@ def pokemons_has_type(poke_type: str):
 # TODO: Wish for putting all of pokemon type calc in different functions and call them from this calc_type_multiplier
 
 
-# attack the other pokemon
+    # Finds the product of a multiplier of an attack against a defending pokemon
 def calc_type_multiplier(attacking_type, defending_type_1, defending_type_2):
     if attacking_type != "noType":
-        type_1_attack_type_1 = get_poke_type_multiplier(attacking_type, defending_type_1)
+        attack_type_1 = get_poke_type_multiplier(attacking_type, defending_type_1)
 
         if defending_type_2 != "noType":
-            type_1_attack_type_2 = get_poke_type_multiplier(attacking_type, defending_type_2)
+            attack_type_2 = get_poke_type_multiplier(attacking_type, defending_type_2)
+        # If defending pokemon does not have 2 types
         else:
-            type_1_attack_type_2 = 1
+            attack_type_2 = 1
 
-        return type_1_attack_type_1 * type_1_attack_type_2
-
+        return attack_type_1 * attack_type_2
+    # if attacker pokemon does not have 2 types
     return 0
 
 
-def sum_type_battle(attacking_type_1, attacking_type_2, defending_type_1, defending_type_2):
-    return calc_type_multiplier(attacking_type_1, defending_type_1, defending_type_2) + calc_type_multiplier(attacking_type_2, defending_type_1, defending_type_2)
+    # Finds strongest attacking type versus defending pokemon
+def find_strongest_type(attacking_type_1, attacking_type_2, defending_type_1, defending_type_2):
+    attack_type_1 = calc_type_multiplier(attacking_type_1, defending_type_1, defending_type_2)
+    attack_type_2 = calc_type_multiplier(attacking_type_2, defending_type_1, defending_type_2)
+
+    if attack_type_1 > attack_type_2:
+        return attack_type_1
+    else:
+        return attack_type_2
 
 
 def battle_pokemon(first: int, second: int):
@@ -125,17 +133,12 @@ def battle_pokemon(first: int, second: int):
     poke_two_type_1 = poke_two["Type_1"].values[0]
     poke_two_type_2 = poke_two["Type_2"].values[0]
 
-    # ("poke1", (sum_type_battle(poke_one_type_1, poke_one_type_2, poke_two_type_1, poke_two_type_2)))
-    # print("poke2", (sum_type_battle(poke_two_type_1, poke_two_type_2, poke_one_type_1, poke_one_type_2)))
+    # Pokemon power determined by stats and strongest type versus given pokemon
+    poke_one_power = poke_one_stats * find_strongest_type(poke_one_type_1, poke_one_type_2, poke_two_type_1, poke_two_type_2)
+    poke_two_power = poke_two_stats * find_strongest_type(poke_two_type_1, poke_two_type_2, poke_one_type_1, poke_one_type_2)
 
-    # calc_type_multiplier(poke_one_type_1, poke_two_type_1, poke_two_type_2)) + calc_type_multiplier(poke_one_type_2, poke_two_type_1, poke_two_type_2)
     # Battle
-
-    poke_one_strength = poke_one_stats * sum_type_battle(poke_one_type_1, poke_one_type_2, poke_two_type_1, poke_two_type_2)
-    poke_two_strength = poke_two_stats * sum_type_battle(poke_two_type_1, poke_two_type_2, poke_one_type_1, poke_one_type_2)
-    print("poke1_multiplier", sum_type_battle(poke_one_type_1, poke_one_type_2, poke_two_type_1, poke_two_type_2), "poke1_sum", poke_one_strength)
-    print("poke2_multiplier", sum_type_battle(poke_two_type_1, poke_two_type_2, poke_one_type_1, poke_one_type_2), "poke2_sum", poke_two_strength)
-    if poke_one_strength > poke_two_strength:
+    if poke_one_power > poke_two_power:
         winner = poke_one_id
     else:
         winner = poke_two_id
@@ -236,21 +239,8 @@ def calc_battles():
 
 
 if __name__ == "__main__":
-    # write_all_battles()
-    # calc_battles()
-    # calc_battles_diff()
-    # poke_type_multiplier("fire", "grass")
-    # battle_pokemon(2, 5)
-    # print(calc_type_multiplier("electric", "normal", "noType"))
-    # print(calc_type_multiplier("electric", "dragon", "water"))
-    # print(battle_pokemon(19, 92))
 
-    #calc_type_multiplier("ghost", "normal", "noType")
-    #print("mellemrum")
-    #calc_type_multiplier("poison", "normal", "noType")
-    #print("mellemrum")
-    #sum_type_battle("normal", "noType", "ghost", "poison")
-    #print("mellemrum")
-   #print(253 * sum_type_battle("normal", "noType", "ghost", "poison"))
-    #print("mellemrum2")
-    print(battle_pokemon(1, 9))
+    print(battle_pokemon(103, 9))
+    print(battle_pokemon(82, 150))
+    print(battle_pokemon(76, 71))
+    print(battle_pokemon(76, 25))
