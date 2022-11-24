@@ -16,6 +16,8 @@ def specific_pokemon(name: str):
     x = ['HP','Attack','Defense','Sp. Attack','Sp. Defense','Speed']
     y = [hp, attack, defense, sp_attack, sp_defense, speed]
 
+    fig, ax = plt.subplots()
+    ax.plot(x,y)
     plt.plot(x,y,label=f'{name}, {sum_stats}')
 
 
