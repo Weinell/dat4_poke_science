@@ -1,3 +1,4 @@
+from pathlib import Path
 import requests
 import csv
 import os.path
@@ -5,7 +6,8 @@ import pandas as pd
 
 
 def read_pokemon_data(file_path: str):
-    if not os.path.exists(file_path):
+    print(Path(__file__))
+    if not Path(file_path).is_file():
         convert_pokemon_to_csv()
 
     df = pd.read_csv(file_path)
@@ -58,7 +60,7 @@ def convert_pokemon_to_csv():
 
     all_pokemon = get_all_pokemon(151)
 
-    with open('../data/pokemon.csv', 'w') as file:
+    with open(Path.cwd().parents[2] / 'data/pokemon.csv', 'w') as file:
         writer = csv.writer(file)
         writer.writerow(header)
 
