@@ -11,14 +11,16 @@ def specific_pokemon(name: str):
     sp_defense = df[df['Name'] == name]['Sp_Defense']
     speed = df[df['Name'] == name]['Speed']
 
-    sum_stats = df[df['Name'] == name]['Sum_stats']
+    sum_stats = df[df['Name'] == name]['Sum_stats'].values[0]
 
+    x = ['HP','Attack','Defense','Sp. Attack','Sp. Defense','Speed']
+    y = [hp, attack, defense, sp_attack, sp_defense, speed]
 
-    plt.plot(['HP','Attack','Defense','Sp. Attack','Sp. Defense','Speed'],[hp, attack, defense, sp_attack, sp_defense, speed])
-    plt.legend(f'{name, sum_stats}')
+    plt.plot(x,y,label=f'{name}, {sum_stats}')
 
 
 def average_stats():
+
     avg_hp = hp.mean()
     avg_attack = attack.mean()
     avg_defense = defense.mean()
@@ -29,11 +31,18 @@ def average_stats():
 
     avg_pokemon_stats_fig = plt.figure(2)	#identifies the figure
     plt.title("Average Stat size", fontsize='16')	#title
-    plt.plot(['HP','Attack','Defense','Sp. Attack','Sp. Defense','Speed'],[avg_hp, avg_attack, avg_defense, avg_sp_attack, avg_sp_defense, avg_speed])	#plot the points
+    x = ['HP','Attack','Defense','Sp. Attack','Sp. Defense','Speed']
+    y = [avg_hp, avg_attack, avg_defense, avg_sp_attack, avg_sp_defense, avg_speed]
+    plt.plot(x,y,linestyle='dashed', color='black')	#plot the points
     specific_pokemon('chansey')
+    specific_pokemon('charizard')
+    specific_pokemon('mewtwo')
+    specific_pokemon('snorlax')
+    specific_pokemon('caterpie')
     plt.xlabel("Type of Stat",fontsize='13')	#adds a label in the x axis
     plt.ylabel("Size of Stat",fontsize='13')	#adds a label in the y axis
     plt.ylim(-10,260)
+    plt.legend()
     plt.savefig('plots/avg_pokemon_stats.png')	#saves the figure in the present directory
     plt.grid()	#shows a grid under the plot
     plt.show()
