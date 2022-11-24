@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
 
-df = pd.read_csv("battle_data.csv")
+df = pd.read_csv("../../../data/v1/battle_data.csv")
 
 y = df.iloc[:, :1]
 X = df.iloc[:, 1:]
