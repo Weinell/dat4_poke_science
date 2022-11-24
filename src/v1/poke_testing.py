@@ -15,6 +15,8 @@ def get_two_pokemon(first_pokemon: int, second_pokemon: int):
 
     data = np.concatenate((poke_one, poke_two))
 
-    df = pd.DataFrame([data])
+    header = ['Poke_1_HP', 'Poke_1_Attack', 'Poke_1_Defense', 'Poke_1_Sp_Attack', 'Poke_1_Sp_Defense', 'Poke_1_Speed', 'Poke_2_HP', 'Poke_2_Attack','Poke_2_Defense', 'Poke_2_Sp_Attack', 'Poke_2_Sp_Defense','Poke_2_Speed']
+
+    df = pd.DataFrame([data],columns=header)
 
     return df
