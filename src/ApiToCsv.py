@@ -9,6 +9,7 @@ def read_pokemon_data(file_path: str):
         convert_pokemon_to_csv()
 
     df = pd.read_csv(file_path)
+    df['Type_2'] = df['Type_2'].fillna("noType")
     return df
 
 
@@ -57,7 +58,7 @@ def convert_pokemon_to_csv():
 
     all_pokemon = get_all_pokemon(151)
 
-    with open('../../data/pokemon.csv', 'w') as file:
+    with open('../data/pokemon.csv', 'w') as file:
         writer = csv.writer(file)
         writer.writerow(header)
 
@@ -68,4 +69,4 @@ def convert_pokemon_to_csv():
 
 
 if __name__ == '__main__':
-    read_battles_data()
+    convert_pokemon_to_csv()

@@ -81,12 +81,29 @@ def get_poke_type_multiplier(attacker: str, defender: str) -> float:
 
 
 def pokemons_has_type(poke_type: str):
-    return poke_type != "nan"
+    return poke_type != "noType"
 
 
 # TODO: Wish for putting all of pokemon type calc in different functions and call them from this calc_type_multiplier
-def calc_type_multiplier():
-    pass
+
+
+# attack the other pokemon
+def calc_type_multiplier(attacking_type, defending_type_1, defending_type_2):
+    if attacking_type != "noType":
+        type_1_attack_type_1 = get_poke_type_multiplier(attacking_type, defending_type_1)
+
+        if defending_type_2 != "noType":
+            type_1_attack_type_2 = get_poke_type_multiplier(attacking_type, defending_type_2)
+        else:
+            type_1_attack_type_2 = 1
+
+        return type_1_attack_type_1 * type_1_attack_type_2
+
+    return 0
+
+
+def sum_type_battle(attacking_type_1, attacking_type_2, defending_type_1, defending_type_2):
+    return calc_type_multiplier(attacking_type_1, defending_type_1, defending_type_2) + calc_type_multiplier(attacking_type_2, defending_type_1, defending_type_2)
 
 
 def battle_pokemon(first: int, second: int):
@@ -103,31 +120,22 @@ def battle_pokemon(first: int, second: int):
 
     # Type multiplier stuff ugly pokemon 1 vs pokemon 2
     poke_one_type_1 = poke_one["Type_1"].values[0]
-    poke_one_type_2 = poke_two["Type_2"].values[0]
+    poke_one_type_2 = poke_one["Type_2"].values[0]
 
     poke_two_type_1 = poke_two["Type_1"].values[0]
     poke_two_type_2 = poke_two["Type_2"].values[0]
 
-    # pokemon 1 type 1 attacks pokemon 2
-    type_1_mult_1 = get_poke_type_multiplier(poke_one_type_1, poke_two_type_1)
-    if poke_two_type_2 != "nan":
-        type_1_mult_2 = get_poke_type_multiplier(poke_one_type_1, poke_two_type_2)
-    else:
-        type_1_mult_2 = 0
-    type_calc_1 = type_1_mult_1 * type_1_mult_2
+    # ("poke1", (sum_type_battle(poke_one_type_1, poke_one_type_2, poke_two_type_1, poke_two_type_2)))
+    # print("poke2", (sum_type_battle(poke_two_type_1, poke_two_type_2, poke_one_type_1, poke_one_type_2)))
 
-    #
-
-    # pokemon 2 attacks pokemon 1
-    type_2_mult_1 = get_poke_type_multiplier(poke_two_type_1, poke_one_type_2)
-    if poke_two_type_2 != "nan":
-        type_2_mult_2 = get_poke_type_multiplier(poke_two_type_2, poke_one_type_2)
-    else:
-        type_2_mult_2 = 0
-    type_calc_2 = type_2_mult_1 + type_2_mult_2
-
+    # calc_type_multiplier(poke_one_type_1, poke_two_type_1, poke_two_type_2)) + calc_type_multiplier(poke_one_type_2, poke_two_type_1, poke_two_type_2)
     # Battle
-    if poke_one_stats * type_calc_1 > poke_two_stats * type_calc_2:
+
+    poke_one_strength = poke_one_stats * sum_type_battle(poke_one_type_1, poke_one_type_2, poke_two_type_1, poke_two_type_2)
+    poke_two_strength = poke_two_stats * sum_type_battle(poke_two_type_1, poke_two_type_2, poke_one_type_1, poke_one_type_2)
+    print("poke1_multiplier", sum_type_battle(poke_one_type_1, poke_one_type_2, poke_two_type_1, poke_two_type_2), "poke1_sum", poke_one_strength)
+    print("poke2_multiplier", sum_type_battle(poke_two_type_1, poke_two_type_2, poke_one_type_1, poke_one_type_2), "poke2_sum", poke_two_strength)
+    if poke_one_strength > poke_two_strength:
         winner = poke_one_id
     else:
         winner = poke_two_id
@@ -232,4 +240,17 @@ if __name__ == "__main__":
     # calc_battles()
     # calc_battles_diff()
     # poke_type_multiplier("fire", "grass")
-    battle_pokemon(2, 5)
+    # battle_pokemon(2, 5)
+    # print(calc_type_multiplier("electric", "normal", "noType"))
+    # print(calc_type_multiplier("electric", "dragon", "water"))
+    # print(battle_pokemon(19, 92))
+
+    #calc_type_multiplier("ghost", "normal", "noType")
+    #print("mellemrum")
+    #calc_type_multiplier("poison", "normal", "noType")
+    #print("mellemrum")
+    #sum_type_battle("normal", "noType", "ghost", "poison")
+    #print("mellemrum")
+   #print(253 * sum_type_battle("normal", "noType", "ghost", "poison"))
+    #print("mellemrum2")
+    print(battle_pokemon(1, 9))
