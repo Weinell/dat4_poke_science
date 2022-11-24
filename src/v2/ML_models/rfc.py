@@ -1,11 +1,16 @@
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+<<<<<<< HEAD
+from src.v1.poke_testing import get_two_pokemon
+import pandas as pd
+=======
 from sklearn.metrics import accuracy_score
 from src.poke_testing import get_two_pokemon
 import pandas as pd
 import numpy as np
 
 
+>>>>>>> c0daccff38a8f83931d872d5645c916002c46249
 
 df = pd.read_csv("../../../data/v1/battle_data.csv")
 
