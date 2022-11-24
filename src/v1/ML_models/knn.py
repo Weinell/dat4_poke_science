@@ -2,7 +2,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 import pandas as pd
 
-df = pd.read_csv("battle_data.csv")
+df = pd.read_csv("../../../data/v1/battle_data.csv")
 
 y = df.iloc[:, :1]
 X = df.iloc[:, 1:]
