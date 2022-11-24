@@ -1,9 +1,9 @@
 import csv
 from enum import Enum
-
 from src.ApiToCsv import read_pokemon_data, read_battles_data
 import pandas as pd
 import numpy as np
+from pathlib import Path
 
 MAX_ID = 151
 
@@ -150,7 +150,7 @@ def write_all_battles():
     poke_count = MAX_ID
     header = ['Poke_1', 'Poke_2', 'Winner']
 
-    with open("../../data/v2/match.csv", "w") as file:
+    with open(Path.cwd().parents[1] / "data/v2/match.csv", "w") as file:
         writer = csv.writer(file)
         writer.writerow(header)
         for i in range(poke_count):

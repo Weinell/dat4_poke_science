@@ -2,10 +2,22 @@ from sklearn.linear_model import Perceptron
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
+<<<<<<< HEAD
+<<<<<<< HEAD
 from pathlib import Path
 from src.v1.poke_testing import get_two_pokemon
 
 df = pd.read_csv(Path.cwd().parents[2] / 'data/v1/battle_data.csv')
+=======
+
+df = pd.read_csv("../../../data/v1/battle_data.csv")
+>>>>>>> main
+=======
+from pathlib import Path
+from src.v1.poke_testing import get_two_pokemon
+
+df = pd.read_csv(Path.cwd().parents[2] / 'data/v1/battle_data.csv')
+>>>>>>> 08696da4a81a5af36dea30711ca4031fe2ba46a1
 
 y = df.iloc[:, :1]
 X = df.iloc[:, 1:]
@@ -26,9 +38,25 @@ preds = model.predict(X_test)
 score = model.score(X_test, y_test)
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 if __name__ == "__main__":
     print("original", score)
     print("normalize", score_norm)
     battle = get_two_pokemon(1, 25)
     predict_battle = model.predict(battle)
     print(predict_battle)
+=======
+
+if __name__ == "__main__":
+    print("original", score)
+    print("normalize", score_norm)
+>>>>>>> main
+=======
+if __name__ == "__main__":
+    print("original", score)
+    print("normalize", score_norm)
+    battle = get_two_pokemon(1, 25)
+    predict_battle = model.predict(battle)
+    print(predict_battle)
+>>>>>>> 08696da4a81a5af36dea30711ca4031fe2ba46a1

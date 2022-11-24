@@ -1,12 +1,10 @@
 from pathlib import Path
 import requests
 import csv
-import os.path
 import pandas as pd
 
 
 def read_pokemon_data(file_path: str):
-    print(Path(__file__))
     if not Path(file_path).is_file():
         convert_pokemon_to_csv()
 
