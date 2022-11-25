@@ -87,5 +87,5 @@ if __name__ == '__main__':
         print(id_to_append)
     print(pokemons)
     print(counts.to_csv())
-    #plt.bar(pokemons,counts,width=0.4)
-    #plt.savefig('plots/win_counts.png')	#saves the figure in the present directory
+    plt.bar(pokemons,counts,width=0.4)
+    plt.savefig('plots/win_counts.png')	#saves the figure in the present directory
