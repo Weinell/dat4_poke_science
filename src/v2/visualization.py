@@ -54,7 +54,7 @@ def average_stats():
 if __name__ == '__main__':
 
     df = pd.read_csv(Path.cwd().parents[1] / 'data/pokemon.csv')
-    df_matches = pd.read_csv(Path.cwd().parents[1] / 'data/v1/match.csv')
+    df_matches = pd.read_csv(Path.cwd().parents[1] / 'data/v2/match.csv')
 
     hp = pd.Series(df['HP'])
     attack = pd.Series(df['Attack'])
@@ -75,17 +75,8 @@ if __name__ == '__main__':
     average_stats()
 
     counts = df_matches['Winner'].value_counts().sort_index()
-
-    pokemons = ['chansey',
-                'charizard',
-                'mewtwo',
-                'cloyster',
-                'pidgey']
-
-    for pokemon in pokemons:
-        id_to_append = df[df['Name'] == pokemon]['Id']
-        print(id_to_append)
+    pokemons = df_matches['Poke_1'].unique()
     print(pokemons)
-    print(counts.to_csv())
+    print(counts)
     plt.bar(pokemons,counts,width=0.4)
     plt.savefig('plots/win_counts.png')	#saves the figure in the present directory

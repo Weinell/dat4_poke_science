@@ -150,14 +150,17 @@ def write_all_battles():
     poke_count = MAX_ID
     header = ['Poke_1', 'Poke_2', 'Winner']
 
-    with open(Path.cwd().parents[1] / "data/v2/match.csv", "w") as file:
+    with open("../../data/v2/match.csv", "w") as file:
         writer = csv.writer(file)
         writer.writerow(header)
+        skip_pokemon = 0
         for i in range(poke_count):
             for j in range(poke_count):
-                if i != j:
+                # Ignores itself  and
+                if i != j and j > skip_pokemon:
                     # +1 because we are going for Pokemon id and not index in array
                     writer.writerow(battle_pokemon(i + 1, j + 1))
+            skip_pokemon = skip_pokemon+1
 
 
 def calc_stat_diff(poke1, poke2):
@@ -208,11 +211,11 @@ def calc_battles_diff():
 
 def calc_battles():
     pokemons = read_pokemon_data("../../data/pokemon.csv")
-    battle_results = read_battles_data("../../data/v2/match.csv")
+    battle_results = read_battles_data(Path.cwd().parents[1] / "data/v2/match.csv")
 
     header = ['Did_Poke1_Win', 'Poke_1_HP', 'Poke_1_Attack', 'Poke_1_Defense', 'Poke_1_Sp_Attack', 'Poke_1_Sp_Defense',
-              'Poke_1_Speed', 'Poke_2_HP', 'Poke_2_Attack', 'Poke_2_Defense', 'Poke_2_Sp_Attack', 'Poke_2_Sp_Defense',
-              'Poke_2_Speed']
+              'Poke_1_Speed','Poke_1_Type_1','Poke_1_Type_2', 'Poke_2_HP', 'Poke_2_Attack', 'Poke_2_Defense', 'Poke_2_Sp_Attack', 'Poke_2_Sp_Defense',
+              'Poke_2_Speed','Poke_1_Type_1','Poke_2_Type_2']
 
     df = pd.DataFrame()
 
@@ -229,13 +232,13 @@ def calc_battles():
 
         pokemon_battle_info = pd.Series(
             [win, poke_one['HP'].values[0], poke_one['Attack'].values[0], poke_one['Defense'].values[0],
-             poke_one['Sp_Attack'].values[0], poke_one['Sp_Defense'].values[0], poke_one['Speed'].values[0],
+             poke_one['Sp_Attack'].values[0], poke_one['Sp_Defense'].values[0], poke_one['Speed'].values[0], poke_one['Type_1'].values[0],poke_one['Type_2'].values[0],
              poke_two['HP'].values[0], poke_two['Attack'].values[0], poke_two['Defense'].values[0],
-             poke_two['Sp_Attack'].values[0], poke_two['Sp_Defense'].values[0], poke_two['Speed'].values[0]])
+             poke_two['Sp_Attack'].values[0], poke_two['Sp_Defense'].values[0], poke_two['Speed'].values[0],poke_two['Type_1'].values[0],poke_two['Type_2'].values[0]])
         battle_to_concat = pd.DataFrame([pokemon_battle_info])
         df = pd.concat([battle_to_concat, df], ignore_index=True)
 
-    df.to_csv('battle_data.csv', index=False, header=header)
+    df.to_csv(Path.cwd().parents[1] / 'data/v2/battle_data.csv', index=False, header=header)
 
 
 if __name__ == "__main__":
@@ -244,3 +247,4 @@ if __name__ == "__main__":
     print(battle_pokemon(82, 150))
     print(battle_pokemon(76, 71))
     print(battle_pokemon(76, 25))
+    calc_battles()
