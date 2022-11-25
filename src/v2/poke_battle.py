@@ -213,9 +213,9 @@ def calc_battles():
     pokemons = read_pokemon_data("../../data/pokemon.csv")
     battle_results = read_battles_data(Path.cwd().parents[1] / "data/v2/match.csv")
 
-    header = ['Did_Poke1_Win', 'Poke_1_HP', 'Poke_1_Attack', 'Poke_1_Defense', 'Poke_1_Sp_Attack', 'Poke_1_Sp_Defense',
-              'Poke_1_Speed','Poke_1_Type_1','Poke_1_Type_2', 'Poke_2_HP', 'Poke_2_Attack', 'Poke_2_Defense', 'Poke_2_Sp_Attack', 'Poke_2_Sp_Defense',
-              'Poke_2_Speed','Poke_1_Type_1','Poke_2_Type_2']
+    header = ['Did_Poke1_Win','Poke_1_Type_1','Poke_1_Type_2', 'Poke_1_HP', 'Poke_1_Attack', 'Poke_1_Defense', 'Poke_1_Sp_Attack', 'Poke_1_Sp_Defense',
+              'Poke_1_Speed','Poke_2_Type_1','Poke_2_Type_2', 'Poke_2_HP', 'Poke_2_Attack', 'Poke_2_Defense', 'Poke_2_Sp_Attack', 'Poke_2_Sp_Defense',
+              'Poke_2_Speed']
 
     df = pd.DataFrame()
 
@@ -231,10 +231,10 @@ def calc_battles():
         win = did_1_win(winner, first_pokemon)
 
         pokemon_battle_info = pd.Series(
-            [win, poke_one['HP'].values[0], poke_one['Attack'].values[0], poke_one['Defense'].values[0],
-             poke_one['Sp_Attack'].values[0], poke_one['Sp_Defense'].values[0], poke_one['Speed'].values[0], poke_one['Type_1'].values[0],poke_one['Type_2'].values[0],
+            [win,poke_one['Type_1'].values[0],poke_one['Type_2'].values[0], poke_one['HP'].values[0], poke_one['Attack'].values[0], poke_one['Defense'].values[0],
+             poke_one['Sp_Attack'].values[0], poke_one['Sp_Defense'].values[0], poke_one['Speed'].values[0],poke_two['Type_1'].values[0],poke_two['Type_2'].values[0],
              poke_two['HP'].values[0], poke_two['Attack'].values[0], poke_two['Defense'].values[0],
-             poke_two['Sp_Attack'].values[0], poke_two['Sp_Defense'].values[0], poke_two['Speed'].values[0],poke_two['Type_1'].values[0],poke_two['Type_2'].values[0]])
+             poke_two['Sp_Attack'].values[0], poke_two['Sp_Defense'].values[0], poke_two['Speed'].values[0]])
         battle_to_concat = pd.DataFrame([pokemon_battle_info])
         df = pd.concat([battle_to_concat, df], ignore_index=True)
 
