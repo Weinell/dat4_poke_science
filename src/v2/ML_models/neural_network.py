@@ -1,5 +1,6 @@
 import pandas as pd
 from pathlib import Path
+from src.v2.poke_testing import get_two_pokemon
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
@@ -49,3 +50,6 @@ score_norm = nn_norm.score(X_norm_test, y_test)
 if __name__ == "__main__":
     print("original", score)
     print("normalize", score_norm)
+    battle = get_two_pokemon(1, 7)
+    predict_battle = nn_norm.predict(battle)
+    print(predict_battle)
