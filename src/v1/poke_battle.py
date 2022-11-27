@@ -1,6 +1,7 @@
 import csv
 from src.ApiToCsv import read_pokemon_data, read_battles_data
 import pandas as pd
+from pathlib import Path
 
 MAX_ID = 151
 
@@ -31,11 +32,14 @@ def write_all_battles():
     with open("../../data/v1/match.csv", "w") as file:
         writer = csv.writer(file)
         writer.writerow(header)
+        skip_pokemon = 0
         for i in range(poke_count):
             for j in range(poke_count):
-                if i != j:
+                # Ignores itself  and
+                if i != j and j > skip_pokemon:
                     # +1 because we are going for Pokemon id and not index in array
                     writer.writerow(battle_pokemon(i + 1, j + 1))
+            skip_pokemon = skip_pokemon+1
 
 
 def calc_stat_diff(poke1, poke2):
@@ -110,6 +114,5 @@ def calc_battles():
 
 
 if __name__ == "__main__":
+    #print(battle_pokemon(1, 9))
     write_all_battles()
-    #calc_battles()
-    #calc_battles_diff()

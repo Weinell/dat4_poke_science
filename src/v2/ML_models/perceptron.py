@@ -2,10 +2,8 @@ from sklearn.linear_model import Perceptron
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
-from pathlib import Path
-from src.v1.poke_testing import get_two_pokemon
 
-df = pd.read_csv(Path.cwd().parents[2] / 'data/v1/battle_data.csv')
+df = pd.read_csv("../../../data/v1/battle_data.csv")
 
 y = df.iloc[:, :1]
 X = df.iloc[:, 1:]
@@ -24,6 +22,7 @@ model = Perceptron()
 model.fit(X_train, y_train)
 preds = model.predict(X_test)
 score = model.score(X_test, y_test)
+
 
 
 if __name__ == "__main__":
