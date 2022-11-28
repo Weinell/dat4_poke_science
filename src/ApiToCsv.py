@@ -4,7 +4,7 @@ import csv
 import pandas as pd
 
 
-def read_pokemon_data(file_path: str):
+def read_pokemon_data(file_path: Path | str):
     if not Path(file_path).is_file():
         convert_pokemon_to_csv()
 
@@ -13,7 +13,7 @@ def read_pokemon_data(file_path: str):
     return df
 
 
-def read_battles_data(file_path: str):
+def read_battles_data(file_path: Path | str):
     df = pd.read_csv(file_path)
     return df
 
