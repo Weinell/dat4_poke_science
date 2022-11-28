@@ -46,6 +46,6 @@ score = model.score(X_test, y_test)
 if __name__ == "__main__":
     print("original", score)
     print("normalize", score_norm)
-    battle = get_two_pokemon(1, 7)
+    battle = get_two_pokemon(1, 25)
     predict_battle = model.predict(battle)
     print(predict_battle)
