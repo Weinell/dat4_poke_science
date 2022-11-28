@@ -6,6 +6,7 @@ import pandas as pd
 
 def read_pokemon_data(file_path: str):
     if not Path(file_path).is_file():
+        print('File did not exist', file_path)
         convert_pokemon_to_csv()
 
     df = pd.read_csv(file_path)
