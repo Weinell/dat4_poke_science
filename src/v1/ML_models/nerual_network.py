@@ -11,13 +11,13 @@ X = df.iloc[:, 1:]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=40)
 
 # Original data
-nn = MLPClassifier(activation='relu', solver='adam', hidden_layer_sizes=(8, 8, 8), max_iter=500)
+nn = MLPClassifier(activation='logistic', solver='adam', hidden_layer_sizes=(8, 8, 8), max_iter=500)
 nn.fit(X_train, y_train)
 pred = nn.predict(X_test)
 score = nn.score(X_test, y_test)
 
 # Normalized data
-nn_norm = MLPClassifier(activation='relu', solver='adam', hidden_layer_sizes=(8, 8, 8), max_iter=500)
+nn_norm = MLPClassifier(activation='logistic', solver='adam', hidden_layer_sizes=(8, 8, 8), max_iter=500)
 scaler = MinMaxScaler()
 X_norm = scaler.fit_transform(X_train)
 X_norm_test = scaler.fit_transform(X_test)
