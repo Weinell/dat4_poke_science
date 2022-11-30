@@ -5,28 +5,24 @@ def plot_types():
     # Plotting all pokemon type_1
     pokemons = read_pokemon_data("../../data/pokemon.csv")
     poke_types = pokemons["Type_1"].value_counts()
-    plt = poke_types.plot(kind="pie", title="Pokemon types", autopct="%1.1f%%", legend=True, figsize=(9, 6))
+    plt = poke_types.plot(kind="pie", title="Pokemon types 1", autopct="%1.1f%%", legend=True, figsize=(9, 6))
     plt.legend(loc="center right", bbox_to_anchor=(1.3, 0.5))
     fig = plt.get_figure()
     fig.savefig("types.png")
 
-    # plotting both types with NoType
-    poke_types_both = pokemons[["Type_1", "Type_2"]].value_counts()
-    plt_2 = poke_types_both.plot(kind="pie", title="Pokemon types both", autopct="%1.1f%%", legend=True, figsize=(9, 6))
-    plt_2.legend(loc="center right", bbox_to_anchor=(1.3, 0.5))
-    fig_2 = plt_2.get_figure()
-    fig_2.savefig("types_both.png")
 
+def plot_types_2():
     # Dropping NoType
-    poke_types_drop = pokemons[["Type_1", "Type_2"]]
-    pbt = poke_types_drop
+    pokemons = read_pokemon_data("../../data/pokemon.csv")
 
-    pbt = poke_types_drop.drop(pbt[pbt["Type_2"] == "noType"].index)
-    pbt = pbt.value_counts()
-    plt_3 = pbt.plot(kind="pie", title="Pokemon types both \n (noType dropped))", autopct="%1.1f%%", legend=True, figsize=(9, 6))
-    plt_3.legend(loc="center right", bbox_to_anchor=(1.3, 0.5))
-    fig_3 = plt_3.get_figure()
-    fig_3.savefig("types_both_dropped.png")
+    poke_types = pokemons.drop(pokemons[pokemons["Type_2"] == "noType"].index)
+    poke_types = poke_types["Type_2"].value_counts()
+
+    plt = poke_types.plot(kind="pie", title="Pokemon types 2", autopct="%1.1f%%", legend=True,
+                          figsize=(9, 6))
+    plt.legend(loc="center right", bbox_to_anchor=(1.3, 0.5))
+    fig = plt.get_figure()
+    fig.savefig("types_2.png")
 
 
 def plot_legendaries():
@@ -42,3 +38,4 @@ def plot_legendaries():
 
 if __name__ == "__main__":
     plot_types()
+    # plot_types_2()
