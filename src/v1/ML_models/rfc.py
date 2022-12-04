@@ -22,7 +22,12 @@ predict_against_testset = model.predict(X_test)
 
 pokemons_to_battle = get_two_pokemon(150, 4)
 predict_two_pokemon = model.predict(pokemons_to_battle)
+score = model.score(X_test, y_test)
+
 
 
 if __name__ == "__main__":
-    print(predict_two_pokemon)
+    print("original", score)
+    battle = get_two_pokemon(490, 9)
+    predict_battle = model.predict(battle)
+    print(predict_battle)
