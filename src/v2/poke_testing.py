@@ -70,10 +70,6 @@ def get_two_pokemon(first_pokemon: int, second_pokemon: int, normalize: bool):
 
     df_ohe.fillna(0, inplace=True)
 
-    print(df_ohe)
-
-    # Normalize begin
-    # todo This needs to return df_ohe as normalized data (is not done)
     if normalize:
         df_ohe = df_ohe.transpose()
         scaler = MinMaxScaler()
