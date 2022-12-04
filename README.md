@@ -11,7 +11,7 @@ Poke Science uses the data of the original 151 Pokémon created in 1998 to predi
 against another given Pokémon. Two iterations of the program is made to make these predictions:
 - The first iteration (v1)
 uses the [stats](https://bulbapedia.bulbagarden.net/wiki/Stat#Permanent_stats) of the Pokémon to determine the winner.
-- The second iteration (v2) uses both [stats](https://bulbapedia.bulbagarden.net/wiki/Stat#Permanent_stats) as well as
+- The second iteration (v2) uses [stats](https://bulbapedia.bulbagarden.net/wiki/Stat#Permanent_stats) as well as
 [types](https://bulbapedia.bulbagarden.net/wiki/Type) to determine the winner. To see how types have an affect, see this
 [type chart](https://bulbapedia.bulbagarden.net/wiki/Type#Type_chart).
 
