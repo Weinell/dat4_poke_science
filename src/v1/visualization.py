@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 
 
-def specific_pokemon(name: str):
+def specific_pokemon(name: str, color: str = None):
 
     hp = df[df['Name'] == name]['HP']
     attack = df[df['Name'] == name]['Attack']
@@ -19,7 +19,7 @@ def specific_pokemon(name: str):
 
     #fig, ax = plt.subplots()
     #ax.plot(x,y)
-    plt.plot(x,y,label=f'{name}, {sum_stats}')
+    plt.plot(x,y,label=f'{name}, {sum_stats}', color=color)
 
 
 def average_stats():
@@ -33,20 +33,20 @@ def average_stats():
 
 
     avg_pokemon_stats_fig = plt.figure(2)	#identifies the figure
-    plt.title("Average Stat size", fontsize='16')	#title
+    plt.title("Stat size for given Pokemon v1", fontsize='16')	#title
     x = ['HP','Attack','Defense','Sp. Attack','Sp. Defense','Speed']
     y = [avg_hp, avg_attack, avg_defense, avg_sp_attack, avg_sp_defense, avg_speed]
     plt.plot(x,y,linestyle='dashed', color='black')	#plot the points
-    specific_pokemon('chansey')
-    specific_pokemon('charizard')
-    specific_pokemon('mewtwo')
-    specific_pokemon('cloyster')
-    specific_pokemon('pidgey')
+    specific_pokemon('chansey', color='magenta')
+    specific_pokemon('charizard', color='red')
+    specific_pokemon('mewtwo', color='purple')
+    specific_pokemon('cloyster', color='cyan')
+    specific_pokemon('pidgey', color='brown')
     plt.xlabel("Type of Stat",fontsize='13')	#adds a label in the x axis
     plt.ylabel("Size of Stat",fontsize='13')	#adds a label in the y axis
     plt.ylim(-10,260)
     plt.legend()
-    plt.savefig('plots/avg_pokemon_stats.png')	#saves the figure in the present directory
+    plt.savefig('plots/specific_pokemon_stats.png')	#saves the figure in the present directory
     plt.grid()	#shows a grid under the plot
     plt.show()
 
@@ -74,18 +74,15 @@ if __name__ == '__main__':
     plt.show()
     average_stats()
 
-    counts = df_matches['Winner'].value_counts().sort_index()
+    pokemon_ids = df['Id']
+    win_counts = df_matches['Winner'].value_counts().sort_index()
 
-    pokemons = ['chansey',
-                'charizard',
-                'mewtwo',
-                'cloyster',
-                'pidgey']
 
-    for pokemon in pokemons:
-        id_to_append = df[df['Name'] == pokemon]['Id']
-        print(id_to_append)
-    print(pokemons)
-    print(counts.to_csv())
-    plt.bar(pokemons,counts,width=0.4)
+    pokemons = pd.concat([df_matches['Poke_1'],df_matches['Poke_2']]).unique()
+
+    plt.bar(pokemons,win_counts,width=0.4)
+    plt.title('Win Counts for each Pokemon v1', fontsize='16')
+    plt.xlabel("Pokemon ID",fontsize='13')
+    plt.ylabel("Win count",fontsize='13')
+    plt.ylim(0,310)
     plt.savefig('plots/win_counts.png')	#saves the figure in the present directory

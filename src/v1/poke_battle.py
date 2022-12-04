@@ -32,14 +32,13 @@ def write_all_battles():
     with open("../../data/v1/match.csv", "w") as file:
         writer = csv.writer(file)
         writer.writerow(header)
-        skip_pokemon = 0
+
         for i in range(poke_count):
             for j in range(poke_count):
                 # Ignores itself  and
-                if i != j and j > skip_pokemon:
+                if i != j:
                     # +1 because we are going for Pokemon id and not index in array
                     writer.writerow(battle_pokemon(i + 1, j + 1))
-            skip_pokemon = skip_pokemon+1
 
 
 def calc_stat_diff(poke1, poke2):
@@ -116,3 +115,4 @@ def calc_battles():
 if __name__ == "__main__":
     #print(battle_pokemon(1, 9))
     write_all_battles()
+    calc_battles()

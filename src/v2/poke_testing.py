@@ -6,7 +6,7 @@ import numpy as np
 
 
 def get_two_pokemon(first_pokemon: int, second_pokemon: int, normalize: bool):
-    pokemons = read_pokemon_data(Path.cwd().parents[2] / 'data/pokemon.csv')
+    pokemons = read_pokemon_data(Path.cwd().parents[2] / 'data/pokemonDP.csv')
     battles = pd.read_csv(Path.cwd().parents[2] / "data/v2/battle_data.csv")
 
     battles_dummies1_1 = pd.get_dummies(battles.Poke_1_Type_1, prefix='Poke_1_Type_1')
@@ -70,12 +70,11 @@ def get_two_pokemon(first_pokemon: int, second_pokemon: int, normalize: bool):
 
     df_ohe.fillna(0, inplace=True)
 
-    # Normalize begin
-    # todo This needs to return df_ohe as normalized data (is not done)
     if normalize:
         df_ohe = df_ohe.transpose()
         scaler = MinMaxScaler()
         transformed_data = scaler.fit_transform(df_ohe)
+        print(transformed_data)
         transformed_data = transformed_data.transpose()
         return transformed_data
 

@@ -84,9 +84,6 @@ def pokemons_has_type(poke_type: str):
     return poke_type != "noType"
 
 
-# TODO: Wish for putting all of pokemon type calc in different functions and call them from this calc_type_multiplier
-
-
     # Finds the product of a multiplier of an attack against a defending pokemon
 def calc_type_multiplier(attacking_type, defending_type_1, defending_type_2):
     if attacking_type != "noType":
@@ -153,14 +150,14 @@ def write_all_battles():
     with open("../../data/v2/match.csv", "w") as file:
         writer = csv.writer(file)
         writer.writerow(header)
-        skip_pokemon = 0
+
         for i in range(poke_count):
             for j in range(poke_count):
                 # Ignores itself  and
-                if i != j and j > skip_pokemon:
+                if i != j:
                     # +1 because we are going for Pokemon id and not index in array
                     writer.writerow(battle_pokemon(i + 1, j + 1))
-            skip_pokemon = skip_pokemon+1
+
 
 
 def calc_stat_diff(poke1, poke2):
@@ -234,7 +231,7 @@ def calc_battles():
             [win,poke_one['Type_1'].values[0],poke_one['Type_2'].values[0], poke_one['HP'].values[0], poke_one['Attack'].values[0], poke_one['Defense'].values[0],
              poke_one['Sp_Attack'].values[0], poke_one['Sp_Defense'].values[0], poke_one['Speed'].values[0],poke_two['Type_1'].values[0],poke_two['Type_2'].values[0],
              poke_two['HP'].values[0], poke_two['Attack'].values[0], poke_two['Defense'].values[0],
-             poke_two['Sp_Attack'].values[0], poke_two['Sp_Defense'].values[0], poke_two['Speed'].values[0],poke_two['Type_1'].values[0],poke_two['Type_2'].values[0]])
+             poke_two['Sp_Attack'].values[0], poke_two['Sp_Defense'].values[0], poke_two['Speed'].values[0]])
         battle_to_concat = pd.DataFrame([pokemon_battle_info])
         df = pd.concat([battle_to_concat, df], ignore_index=True)
 
@@ -247,4 +244,5 @@ if __name__ == "__main__":
     print(battle_pokemon(82, 150))
     print(battle_pokemon(76, 71))
     print(battle_pokemon(76, 25))
+    write_all_battles()
     calc_battles()
