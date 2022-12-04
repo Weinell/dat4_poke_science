@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
+from src.v1.poke_testing import get_two_pokemon
 
 df = pd.read_csv("../../../data/v1/battle_data.csv")
 
@@ -31,3 +32,6 @@ score_norm = nn_norm.score(X_norm_test, y_test)
 if __name__ == "__main__":
     print("original", score)
     print("normalize", score_norm)
+    battle = get_two_pokemon(490, 9)
+    predict_battle = nn.predict(battle)
+    print(predict_battle)
