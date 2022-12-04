@@ -48,7 +48,7 @@ score_norm = nn_norm.score(X_norm_test, y_test)
 if __name__ == "__main__":
     print("original", score)
     print("normalize", score_norm)
-    battle = get_two_pokemon(7, 150, normalize=True)
+    battle = get_two_pokemon(158, 25, normalize=True)
     predict_battle = nn_norm.predict(battle)
     print(predict_battle)
 
