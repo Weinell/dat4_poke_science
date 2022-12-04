@@ -77,4 +77,8 @@ if __name__ == '__main__':
     counts = df_matches['Winner'].value_counts().sort_index()
     pokemons = pd.concat([df_matches['Poke_1'],df_matches['Poke_2']]).unique()
     plt.bar(pokemons,counts,width=0.4)
+    plt.title('Win Counts for each Pokemon v2', fontsize='16')
+    plt.xlabel("Pokemon ID",fontsize='13')
+    plt.ylabel("Win count",fontsize='13')
+    plt.ylim(0,310)
     plt.savefig('plots/win_counts.png')	#saves the figure in the present directory
