@@ -57,9 +57,9 @@ def convert_pokemon_to_csv():
               'Is_Legendary']
     # data = [poke_id, name, type1, type2, hp, attack, defense, sp_attack, sp_defense, speed]
 
-    all_pokemon = get_all_pokemon(151)
+    all_pokemon = get_all_pokemon(493)
 
-    with open(Path.cwd().parents[2] / 'data/pokemon.csv', 'w') as file:
+    with open(Path.cwd().parent / 'data/pokemonDP.csv', 'w') as file:
         writer = csv.writer(file)
         writer.writerow(header)
 

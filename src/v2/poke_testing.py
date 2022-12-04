@@ -6,7 +6,7 @@ import numpy as np
 
 
 def get_two_pokemon(first_pokemon: int, second_pokemon: int, normalize: bool):
-    pokemons = read_pokemon_data(Path.cwd().parents[2] / 'data/pokemon.csv')
+    pokemons = read_pokemon_data(Path.cwd().parents[2] / 'data/pokemonDP.csv')
     battles = pd.read_csv(Path.cwd().parents[2] / "data/v2/battle_data.csv")
 
     battles_dummies1_1 = pd.get_dummies(battles.Poke_1_Type_1, prefix='Poke_1_Type_1')

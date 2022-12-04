@@ -5,7 +5,7 @@ import numpy as np
 
 
 def get_two_pokemon(first_pokemon: int, second_pokemon: int):
-    pokemons = read_pokemon_data(Path.cwd().parents[2] / 'data/pokemon.csv')
+    pokemons = read_pokemon_data(Path.cwd().parents[2] / 'data/pokemonDP.csv')
 
     pokemons = pokemons.drop(columns=["Type_1", "Type_2", "Is_Legendary", "Sum_stats"])
     pokemons = pd.concat([pokemons], axis=1)
