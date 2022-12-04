@@ -234,7 +234,7 @@ def calc_battles():
             [win,poke_one['Type_1'].values[0],poke_one['Type_2'].values[0], poke_one['HP'].values[0], poke_one['Attack'].values[0], poke_one['Defense'].values[0],
              poke_one['Sp_Attack'].values[0], poke_one['Sp_Defense'].values[0], poke_one['Speed'].values[0],poke_two['Type_1'].values[0],poke_two['Type_2'].values[0],
              poke_two['HP'].values[0], poke_two['Attack'].values[0], poke_two['Defense'].values[0],
-             poke_two['Sp_Attack'].values[0], poke_two['Sp_Defense'].values[0], poke_two['Speed'].values[0],poke_two['Type_1'].values[0],poke_two['Type_2'].values[0]])
+             poke_two['Sp_Attack'].values[0], poke_two['Sp_Defense'].values[0], poke_two['Speed'].values[0]])
         battle_to_concat = pd.DataFrame([pokemon_battle_info])
         df = pd.concat([battle_to_concat, df], ignore_index=True)
 

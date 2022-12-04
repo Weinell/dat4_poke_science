@@ -115,4 +115,4 @@ def calc_battles():
 
 if __name__ == "__main__":
     #print(battle_pokemon(1, 9))
-    write_all_battles()
+    calc_battles()
