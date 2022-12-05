@@ -52,11 +52,30 @@ Find your own two Pokémon and try them out. We have data from Pokémon 001 to 4
 
 ### Status of the Project
 
+We thought that we were being realistic with how far we could get in the project, by setting the 
+proposal requirements low. Apparently, the scope of our project was bigger in the aspects that we thought were easy, and
+the aspects that were difficult ended up being easy.
+Data gathering through the API was easy - as expected, however manipulating it into something that the machine learning models
+could predict on proved difficult. We ended up manipulating the data to match our goals, however we spent around 70% of our time on that.
 
+Apart from that, coming up with relevant visuals (plots) deemed difficult, as well as using Matplotlib to a higher degree.
+
+Machine learning was a lot easier than we expected when we all grasped the major points of how and why it is used.
+During the class exercises we did not understand how machine learning worked properly. 
 
 ### List of Challenges
 
+1. The biggest challenge we set up for ourselves was that all group members were on the same page and skill level.
+   1. This proved to be difficult, since the group was formed by two members that had discussed the scope of the project 
+   a month prior to beginning it. Then the third group member joins, and was not fully convinced on how machine learning 
+   could be applicable in this project.
+   2. A lot of miscommunication took place due to the above-mentioned point - thus a lot of self-learning and convincing
+   had to take place for all group members to find the common goal.
 
+2. Another major challenge was that we wanted to add different kinds of Moves (attacks) that the Pokémon could use that would
+yield the highest amount of damage done to the opposing Pokémon. This could not be done because we spent so much time on
+version 1 and version 2, but it could have been possible with more time and knowledge from the get-go. We are sure that if
+we started the project with our current knowledge, we would have gotten much farther.
 
 ## PokeScience Proposal
 
